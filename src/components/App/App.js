@@ -1,43 +1,59 @@
 import './App.css';
 import Pairs from '../Pairs/Pairs';
 import { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios'; //Ajax requests
 
 function App() {
 
   const [pair, setPair] = useState({});
 
+  const [exAmount, setExAmount] = useState(1);
+    const [total, setTotal] = useState(0);
+
+    const handleChangeEx = (event) => {
+      if(pair.success){
+        setExAmount(event.target.value);
+        const tempTotal = pair.quotes[Object.keys(pair.quotes)[0]].toFixed(2);
+        tempTotal && setTotal((event.target.value*tempTotal).toFixed(2));
+      }
+    }
+
   const handleChange = async (event) => {
-    console.log(event.target.value);
-    const URL = "https://api.apilayer.com/currency_data/live?source=usd&currencies=EUR";
+    const pairSelected = event.target.value;
+    //const source = pairSelected.substring(0,3);
+    const currency = pairSelected;//.substring(3,6);
+    const URL = `https://api.apilayer.com/currency_data/live?source=usd&currencies=${currency}`;
     try{
-      //const response = await fetch(baseURL+apikey+query+movieTitle);
-      //const data = await response.json();
       const response = await axios.get(URL, {
         headers: {
-          apikey: "MISdtjtqxEPsuhsBPFhFMb8DHOmq1H32"
+          apikey: "714zDRFAnCFCc96aMvF6g8l3fQVwHFFP"
         }
       })
-      console.log(response.data);
       setPair(response.data);
+      setExAmount(1);
+      console.log(response.data);
+      setTotal(response.data.quotes[Object.keys(response.data.quotes)[0]].toFixed(2))
     }catch (e) {
       console.log(e);
     }
-
   }
 
   return (
     <div className="App">
       <form>
-      <label htmlFor="pairs">Choose a pairs:</label>
+      <label htmlFor="pairs">Convert USD to:</label>
         <select name="pairs" id="pairs" onChange={handleChange}>
-          <option value="USDAUD">USD - AUD</option>
-          <option value="AUDUSD">AUD - USD</option>
-          <option value="EURGBP">EUR - GBP</option>
-          <option value="USDAOA">USD - AOA</option>
+          <option value="EUR">Euro</option>
+          <option value="JPY">Japanese yen</option>
+          <option value="GBP">Pound sterling</option>
+          <option value="MYR">Malaysian ringgit</option>
+          <option value="RON">Romanian leu</option>
         </select>
       </form>
-      <Pairs />
+      <Pairs pair={pair}/>
+      <label htmlFor="hiTeo">Exchange Amount: </label>
+      <input type="number" min="0.1" step="0.1" value={exAmount} name="hiTeo" id="hiTeo" onChange={handleChangeEx}/>
+      <input type="number" value={total} readOnly/>
     </div>
   );
 }
