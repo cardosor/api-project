@@ -40,6 +40,13 @@ function App() {
 
   return (
     <div className="App">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4 title">Jumbo Exchange</h1>
+          <p class="lead">Returning big bucks for your money</p>
+        </div>
+      </div>
+
       <form>
       <label htmlFor="pairs">Convert USD to:</label>
         <select name="pairs" id="pairs" onChange={handleChange}>

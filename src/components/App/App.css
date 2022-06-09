@@ -1,4 +1,21 @@
-.App {
+.jumbotron{
+  background-image: url("https://images.unsplash.com/photo-1622662124723-5c60aafebd4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y3VycmVuY3l8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60");
+
+}
+.title{
+  color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  text-shadow: 2px 2px white;
+}
+.lead{
+  color:black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  text-shadow: 2px 2px white;
+}
+
+/* .App {
   height: 95vh;
   width: 60%;
   padding: 1rem;
@@ -10,4 +27,4 @@
 
 input {
   margin-bottom: 1rem;
-}
+} */
