@@ -26,7 +26,7 @@ function App() {
     try{
       const response = await axios.get(URL, {
         headers: {
-          apikey: "714zDRFAnCFCc96aMvF6g8l3fQVwHFFP"
+          apikey: process.env.REACT_APP_PAIRS_API_KEY
         }
       })
       setPair(response.data);
